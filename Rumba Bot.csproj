@@ -10,9 +10,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Commands\" />
       <Folder Include="Levels\" />
       <Folder Include="Models\" />
       <Folder Include="Store\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02542" />
     </ItemGroup>
 
 </Project>
