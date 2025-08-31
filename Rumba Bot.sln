@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rumba Bot", "Rumba Bot.csproj", "{B61AF1C4-D4D3-4EA4-971F-9E22A796EABF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F24D6A3B-31DD-45C1-9A76-8ABE873D4C42}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B61AF1C4-D4D3-4EA4-971F-9E22A796EABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B61AF1C4-D4D3-4EA4-971F-9E22A796EABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B61AF1C4-D4D3-4EA4-971F-9E22A796EABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B61AF1C4-D4D3-4EA4-971F-9E22A796EABF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,7 @@
+﻿services:
+  rumba botrumbabot:
+    image: rumba botrumbabot
+    build:
+      context: .
+      dockerfile: Dockerfile
+
