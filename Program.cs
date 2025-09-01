@@ -1,3 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-Console.WriteLine("Hello, World!");
+namespace Rumba_Bot;
+
+class DiscordBot
+{
+    private static DiscordClient Client { get; set; }
+
+    static async Task Main(string[] args)
+    {
+        
+    }
+}
