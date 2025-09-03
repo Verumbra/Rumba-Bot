@@ -2,8 +2,8 @@ namespace Rumba_Bot;
 
 internal class EnvReader
 {
-    public required string Token {get; set;}
-    public required string Prefix {get; set;}
+    public string Token {get; set;}
+    public string Prefix {get; set;}
 
     public EnvReader()
     {
