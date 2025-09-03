@@ -3,3 +3,4 @@
 
 global using DSharpPlus;
 global using DSharpPlus.Entities;
+global using DotNetEnv;
