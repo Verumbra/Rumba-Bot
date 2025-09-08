@@ -43,18 +43,21 @@ class DiscordBot
 
         builder.ConfigureEventHandlers
             (
-                b => b.HandleMessageCreated(async (s, e) =>
-                {
-                    if (e.Message.Content.ToLower().StartsWith("?hello"))
+                b => b
+                    
+                    
+                    .HandleMessageCreated(async (s, e) =>
                     {
-                        await e.Message.RespondAsync($"Hello, {e.Message.Author.Username}!");
-                    }
+                        if (e.Message.Content.ToLower().StartsWith("?hello"))
+                        {
+                            await e.Message.RespondAsync($"Hello, {e.Message.Author.Username}!");
+                        }
 
-                    if (e.Message.Content.ToLower().StartsWith("?help"))
-                    {
-                        await e.Message.RespondAsync($"Sorry, {e.Message.Author.Username}! This section is still under construction.");
-                    }
-                })
+                        if (e.Message.Content.ToLower().StartsWith("?help"))
+                        {
+                            await e.Message.RespondAsync($"Sorry, {e.Message.Author.Username}! This section is still under construction.");
+                        }
+                    })
             );
         
         Client = builder.Build();
