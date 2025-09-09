@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using Rumba_Bot.Services.RedisService;
 
 namespace Rumba_Bot;
 
@@ -37,9 +38,10 @@ class DiscordBot
             Console.WriteLine($"Error loading .env file: {ex.Message}");
         }
         //Console.WriteLine(EnvValues.Token.ToString());
-        
-        
-        
+
+
+        var userDb = new RedisServices($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}",false);
+        await userDb.StartConnection();
         
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(EnvValues.Token, DiscordIntents.All);
         

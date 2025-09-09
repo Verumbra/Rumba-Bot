@@ -15,7 +15,7 @@ public class RedisServices
         _connectionstring = connstring;
     }
 
-    public async void StartConnection()
+    public async Task StartConnection()
     {
         if (_mux?.IsConnected == true) return;
         
