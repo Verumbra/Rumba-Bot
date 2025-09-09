@@ -36,8 +36,11 @@ class DiscordBot
         {
             Console.WriteLine($"Error loading .env file: {ex.Message}");
         }
-
         //Console.WriteLine(EnvValues.Token.ToString());
+        
+        
+        
+        
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(EnvValues.Token, DiscordIntents.All);
         
 
