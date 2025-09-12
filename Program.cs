@@ -62,6 +62,40 @@ class DiscordBot
                         {
                             await e.Message.RespondAsync($"Sorry, {e.Message.Author.Username}! This section is still under construction.");
                         }
+
+                        if (e.Message.Content.ToLower().StartsWith("!save"))
+                        {
+                            string userKey = e.Author.Id.ToString() + "-" + e.Author.GlobalName + "-" + e.Guild.Id.ToString();
+
+                            try
+                            {
+                                await userDb.SaveMessage(userKey, e.Message.Content);
+                                await e.Message.RespondAsync($"Saved Successfully!");
+                            }
+                            catch (Exception exception)
+                            {
+                                Console.WriteLine(exception);
+                                await e.Message.RespondAsync($"Failed to save message!");
+                                throw;
+                            }
+                        }
+
+                        if (e.Message.Content.ToLower().StartsWith("!retrieve"))
+                        {
+                            string userKey = e.Author.Id.ToString() + "-" + e.Author.GlobalName + "-" + e.Guild.Id.ToString();
+
+                            try
+                            {
+                                string result = await userDb.RetrieveMessage(userKey);
+                                await e.Message.RespondAsync(result);
+                            }
+                            catch (Exception exception)
+                            {
+                                Console.WriteLine(exception);
+                                throw;
+                            }
+                            
+                        }
                     })
             );
         

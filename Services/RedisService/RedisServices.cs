@@ -68,5 +68,38 @@ public class RedisServices
         if (m != null)  await m.CloseAsync();
         m?.Dispose();
     }
+
+
+    public async Task SaveMessage(string message, string userId)
+    {
+        var userKey = $"user:{userId}";
+        var userMessage = message; //todo need checks 
+        
+        var redis = GetDatabase();
+        try
+        {
+            await redis.StringSetAsync(userKey, userMessage);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+    }
+
+    public async Task<String> RetrieveMessage(string userKey)
+    {
+        var redis = GetDatabase();
+        try
+        {
+            return await redis.StringGetAsync(userKey);
+        }
+        catch (Exception e)
+        {
+            return "No message found!";
+        }
+        
+    }
     
 }
