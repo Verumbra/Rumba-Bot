@@ -70,7 +70,7 @@ public class RedisServices
     }
 
 
-    public async Task SaveMessage(string message, string userId)
+    public async Task SaveMessage(string userId, string message)
     {
         var userKey = $"user:{userId}";
         var userMessage = message; //todo need checks 

@@ -65,7 +65,7 @@ class DiscordBot
 
                         if (e.Message.Content.ToLower().StartsWith("!save"))
                         {
-                            string userKey = e.Author.Id.ToString() + "-" + e.Author.GlobalName + "-" + e.Guild.Id.ToString();
+                            string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
 
                             try
                             {
@@ -82,7 +82,7 @@ class DiscordBot
 
                         if (e.Message.Content.ToLower().StartsWith("!retrieve"))
                         {
-                            string userKey = e.Author.Id.ToString() + "-" + e.Author.GlobalName + "-" + e.Guild.Id.ToString();
+                            string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
 
                             try
                             {
