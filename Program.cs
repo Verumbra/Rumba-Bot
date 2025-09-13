@@ -66,6 +66,7 @@ class DiscordBot
                         if (e.Message.Content.ToLower().StartsWith("!save"))
                         {
                             string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
+                            Console.WriteLine(userKey);
 
                             try
                             {

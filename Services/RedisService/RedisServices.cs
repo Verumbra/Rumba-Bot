@@ -70,10 +70,10 @@ public class RedisServices
     }
 
 
-    public async Task SaveMessage(string userId, string message)
+    public async Task SaveMessage(string userIdCode, string message)
     {
-        var userKey = $"user:{userId}";
-        var userMessage = message; //todo need checks 
+        RedisKey userKey = $"user:{userIdCode}";
+        RedisValue userMessage = message; //todo need checks 
         
         var redis = GetDatabase();
         try
@@ -93,7 +93,10 @@ public class RedisServices
         var redis = GetDatabase();
         try
         {
-            return await redis.StringGetAsync(userKey);
+            RedisValue result = await redis.StringGetAsync(userKey);
+            if (result.IsNullOrEmpty)
+                return "No saved message found, sorry.";
+            return result.ToString();
         }
         catch (Exception e)
         {
