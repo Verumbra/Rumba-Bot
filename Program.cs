@@ -39,8 +39,8 @@ class DiscordBot
         }
         //Console.WriteLine(EnvValues.Token.ToString());
 
-
-        var userDb = new RedisServices($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}",false);
+        Console.WriteLine($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}");
+        var userDb = new RedisServices("localhost:6379",false);
         await userDb.StartConnection();
         
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(EnvValues.Token, DiscordIntents.All);

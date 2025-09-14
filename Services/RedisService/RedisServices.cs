@@ -3,6 +3,8 @@ namespace Rumba_Bot.Services.RedisService;
 using StackExchange.Redis;
 using DotNetEnv;
 
+
+
 public class RedisServices
 {
     
@@ -72,8 +74,8 @@ public class RedisServices
 
     public async Task SaveMessage(string userIdCode, string message)
     {
-        RedisKey userKey = $"user:{userIdCode}";
-        RedisValue userMessage = message; //todo need checks 
+        string userKey = $"{userIdCode}";
+        string userMessage = message; //todo need checks 
         
         var redis = GetDatabase();
         try
@@ -94,6 +96,7 @@ public class RedisServices
         try
         {
             RedisValue result = await redis.StringGetAsync(userKey);
+            Console.WriteLine("here is result for the retrieval ",result);
             if (result.IsNullOrEmpty)
                 return "No saved message found, sorry.";
             return result.ToString();
