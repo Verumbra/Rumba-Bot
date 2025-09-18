@@ -2,6 +2,7 @@
 
 
 using Rumba_Bot.Services.RedisService;
+using Rumba_Bot.Services.StringUtility;
 
 namespace Rumba_Bot;
 
@@ -9,7 +10,7 @@ namespace Rumba_Bot;
 
 class DiscordBot
 {
-    
+    private static UserInputProcessor InputParser = new UserInputProcessor();
     private static DiscordClient Client { get; set; }
     private static EnvReader EnvValues = new EnvReader();
     
@@ -67,17 +68,23 @@ class DiscordBot
                         {
                             string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
                             Console.WriteLine(userKey);
-
-                            try
+                            
+                            var userMessage = InputParser.TryParseCommand("!","save", e.Message.Content);
+                            if (userMessage != "")
+                                try
+                                {
+                                    await userDb.SaveMessage(userKey, e.Message.Content);
+                                    await e.Message.RespondAsync($"Saved Successfully!");
+                                }
+                                catch (Exception exception)
+                                {
+                                    Console.WriteLine(exception);
+                                    await e.Message.RespondAsync($"Failed to save message!");
+                                    throw;
+                                }
+                            else
                             {
-                                await userDb.SaveMessage(userKey, e.Message.Content);
-                                await e.Message.RespondAsync($"Saved Successfully!");
-                            }
-                            catch (Exception exception)
-                            {
-                                Console.WriteLine(exception);
-                                await e.Message.RespondAsync($"Failed to save message!");
-                                throw;
+                                
                             }
                         }
 

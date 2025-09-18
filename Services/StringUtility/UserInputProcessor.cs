@@ -5,7 +5,7 @@ namespace Rumba_Bot.Services.StringUtility;
 public class UserInputProcessor
 {
     
-    private UserInputProcessor()
+    public UserInputProcessor()
     {
         
     }
