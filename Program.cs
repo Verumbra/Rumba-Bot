@@ -50,10 +50,16 @@ class DiscordBot
         builder.ConfigureEventHandlers
             (
                 b => b
+                        
+                    .HandleGuildDownloadCompleted()    
                     
                     
                     .HandleMessageCreated(async (s, e) =>
                     {
+                        if (e.Author.IsBot == true) return;
+                        
+                        
+                        
                         if (e.Message.Content.ToLower().StartsWith("?hello"))
                         {
                             await e.Message.RespondAsync($"Hello, {e.Message.Author.Username}!");
@@ -73,7 +79,7 @@ class DiscordBot
                             if (userMessage != "")
                                 try
                                 {
-                                    await userDb.SaveMessage(userKey, e.Message.Content);
+                                    await userDb.SaveMessage(userKey, userMessage);
                                     await e.Message.RespondAsync($"Saved Successfully!");
                                 }
                                 catch (Exception exception)
@@ -104,7 +110,7 @@ class DiscordBot
                             }
                             
                         }
-                    })
+                    }).
             );
         
         Client = builder.Build();

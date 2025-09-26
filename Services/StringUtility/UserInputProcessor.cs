@@ -12,12 +12,12 @@ public class UserInputProcessor
 
     public string TryParseCommand(string prefix, string keyword, string message)
     {
-        string pattern = $@"(?<=\Q{prefix}{keyword}\E\s)";
-        Regex commandWordParser =  new Regex(pattern, RegexOptions.Compiled, TimeSpan.FromSeconds(3));
+        string pattern = $@"(?<={Regex.Escape(prefix)}{Regex.Escape(keyword)}\s)";
+        Regex commandWordParser =  new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase, TimeSpan.FromSeconds(3));
         try
         {
             var results = commandWordParser.Split(message, 2);
-            Console.WriteLine(results);
+            Console.WriteLine(results[1]);
             return results[1];
         }
         catch (Exception e)
