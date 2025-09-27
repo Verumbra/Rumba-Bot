@@ -46,12 +46,17 @@ class DiscordBot
         
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(EnvValues.Token, DiscordIntents.All);
         
+        
 
-        builder.ConfigureEventHandlers
+        builder
+            .ConfigureEventHandlers
             (
                 b => b
                         
-                    .HandleGuildDownloadCompleted()    
+                    .HandleGuildDownloadCompleted(async (s, e) =>
+                    {
+                        
+                    })
                     
                     
                     .HandleMessageCreated(async (s, e) =>
@@ -115,7 +120,7 @@ class DiscordBot
                             }
                             
                         }
-                    }).
+                    })
             );
         
         Client = builder.Build();
