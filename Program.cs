@@ -58,7 +58,8 @@ class DiscordBot
                     {
                         if (e.Author.IsBot == true) return;
                         
-                        
+                        //get the user string to the xp and other data point from the dbs
+                        string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
                         
                         if (e.Message.Content.ToLower().StartsWith("?hello"))
                         {
@@ -72,7 +73,7 @@ class DiscordBot
 
                         if (e.Message.Content.ToLower().StartsWith("!save"))
                         {
-                            string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
+                            
                             Console.WriteLine(userKey);
                             
                             var userMessage = InputParser.TryParseCommand("!","save", e.Message.Content);
