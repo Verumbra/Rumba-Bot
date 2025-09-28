@@ -12,3 +12,12 @@ public sealed class UserProfile
     public List<string> Roles { get; set; }
     //todo more features need to be added.
 }
+
+[BsonIgnoreExtraElements]
+public sealed class GuildProfile
+{
+    [BsonId] public ObjectId Id { get; set; }
+    public int GuildId { get; set; }
+    
+    //todo need to think of setting need for the guild to function right.
+}
