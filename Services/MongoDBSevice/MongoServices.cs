@@ -4,5 +4,7 @@ using MongoDB.Driver;
 
 public class MongoServices
 {
-    private string 
+    private string _connectionString;
+    private MongoClient _client;
+    private 
 }
