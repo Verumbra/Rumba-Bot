@@ -40,7 +40,7 @@ class DiscordBot
         }
         //Console.WriteLine(EnvValues.Token.ToString());
 
-        Console.WriteLine($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}");
+        //Console.WriteLine($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}");
         var userDb = new RedisServices("localhost:6379",false);
         await userDb.StartConnection();
         
