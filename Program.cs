@@ -14,6 +14,8 @@ class DiscordBot
     private static DiscordClient Client { get; set; }
     private static EnvReader EnvValues = new EnvReader();
     
+    
+    
     static async Task Main(string[] args)
     {
         try
@@ -55,6 +57,10 @@ class DiscordBot
                         
                     .HandleGuildDownloadCompleted(async (s, e) =>
                     {
+                        //need to check the db if the guild is already in the database and if so make sure that the data is synced
+                        //
+                        var guild = e.Guilds;
+                        s.Guilds.Values
                         
                     })
                     

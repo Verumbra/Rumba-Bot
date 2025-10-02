@@ -3,6 +3,13 @@ namespace Rumba_Bot.Services.MongoDBSevice;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
+
+[BsonIgnoreExtraElements]
+public class Item
+{
+    
+}
+
 [BsonIgnoreExtraElements]
 public sealed class UserProfile
 {
@@ -10,6 +17,7 @@ public sealed class UserProfile
     public string UserId { get; set; }
     public int TotalXp { get; set; }
     public List<string> Roles { get; set; }
+    public List<Item> Items { get; set; }
     //todo more features need to be added.
 }
 

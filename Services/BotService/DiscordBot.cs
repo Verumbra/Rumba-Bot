@@ -1,3 +1,4 @@
+using DSharpPlus.EventArgs;
 using Rumba_Bot.Services.RedisService;
 
 namespace Rumba_Bot.Services.BotService;
@@ -7,6 +8,16 @@ public class RumbaConfig
     public readonly EnvReader EnvValues = new EnvReader();
     public bool isProd {get; set;}
     
+    
+}
+
+public class GuildManagementHelper
+{
+    public async Task OnAllGuildsReady(DiscordClient client, GuildDownloadCompletedEventArgs)
+    {
+        
+    }
+    private async Task<[UserProfile]> ProcessGuildMembers(DiscordGuild guild)
     
 }
 
