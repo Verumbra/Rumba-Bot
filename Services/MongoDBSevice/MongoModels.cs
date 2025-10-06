@@ -29,3 +29,21 @@ public sealed class GuildProfile
     
     //todo need to think of setting need for the guild to function right.
 }
+
+[BsonIgnoreExtraElements]
+public sealed class Quests
+{
+    [BsonId] public ObjectId Id { get; set; }
+    public int QuestId { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public int MinRewardGold { get; set; }
+    public int MaxRewardGold { get; set; }
+    public List<Encounters> Steps { get; set; }
+}
+
+[BsonIgnoreExtraElements]
+public sealed class Encounters
+{
+    [BsonId] public ObjectId Id { get; set; }
+}
