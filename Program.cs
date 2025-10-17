@@ -60,7 +60,17 @@ class DiscordBot
                         //need to check the db if the guild is already in the database and if so make sure that the data is synced
                         //
                         var guild = e.Guilds;
-                        s.Guilds.Values
+                        //s.Guilds.Values
+                        
+                    })
+                    
+                    .HandleMessageUpdated(async (e, s) =>
+                    {
+                        
+                    })
+                    
+                    .HandleMessageDeleted(async (e, s) =>
+                    {
                         
                     })
                     
@@ -112,7 +122,7 @@ class DiscordBot
 
                         if (e.Message.Content.ToLower().StartsWith("!retrieve"))
                         {
-                            string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
+                            //userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
 
                             try
                             {
