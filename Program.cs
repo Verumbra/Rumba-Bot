@@ -66,6 +66,34 @@ class DiscordBot
                     
                     .HandleMessageUpdated(async (e, s) =>
                     {
+                        string before;
+                        try
+                        {
+                            before = s.MessageBefore.ToString();
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                            before = "message not ceched";
+                        }
+                        string after = s.Message.ToString();
+
+                        try
+                        {
+                            var embed = new DiscordEmbedBuilder()
+                            {
+                                Title = "",
+                                
+                            }
+                            .AddField("UserName", s.Author.Username, true)
+                            .AddField();
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                            throw;
+                        }
+
                         
                     })
                     
