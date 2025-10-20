@@ -79,7 +79,10 @@ class DiscordBot
                     {
                         if (e.Author.IsBot == true) return;
                         
-                        //get the user string to the xp and other data point from the dbs
+                        //get the user string
+                        //
+                        //
+                        //to the xp and other data point from the dbs
                         string userKey = $"{e.Author.Id}-{e.Author.GlobalName}-{e.Guild.Id}";
                         //todo load quick user data from redis
                         //todo do any need checks for data
