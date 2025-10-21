@@ -46,6 +46,8 @@ class DiscordBot
         var userDb = new RedisServices("localhost:6379",false);
         await userDb.StartConnection();
         
+        
+        
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(EnvValues.Token, DiscordIntents.All);
         
         
@@ -82,17 +84,19 @@ class DiscordBot
                         {
                             var embed = new DiscordEmbedBuilder()
                             {
-                                Title = "",
+                                Title = "Message edited",
                                 
                             }
                             .AddField("UserName", s.Author.Username, true)
-                            .AddField();
+                            .AddField("Orginal Message", $"Original message: {before}");
                         }
                         catch (Exception exception)
                         {
                             Console.WriteLine(exception);
                             throw;
                         }
+                        
+                        s.Guild.Channels
 
                         
                     })

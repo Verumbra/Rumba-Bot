@@ -10,6 +10,26 @@ public class UserProfileRepositeory
     {
         _collection = database.GetCollection<UserProfile>("UserProfile");
     }
+
+    public async Task<UserProfile> CreateUserProfile(UserProfile profile)
+    {
+        
+    }
+
+    public async Task<UserProfile> UpdateUserProfile(UserProfile profile)
+    {
+        
+    }
+
+    public async Task<UserProfile> DeleteUserProfile(UserProfile profile)
+    {
+        
+    }
+
+    public async Task<UserProfile> GetUserProfile(UserProfile profile)
+    {
+        
+    }
     
     
 }
@@ -22,7 +42,26 @@ public class GuildProfileRepositeory
     {
         _collection = database.GetCollection<GuildProfile>("GuildProfile");
     }
-    
+
+    public async Task<GuildProfile> CreateGuildProfile(GuildProfile profile)
+    {
+        
+    }
+
+    public async Task<GuildProfile> UpdateGuildProfile(GuildProfile profile)
+    {
+        
+    }
+
+    public async Task<GuildProfile> DeleteGuildProfile(GuildProfile profile)
+    {
+        
+    }
+
+    public async Task<GuildProfile> GetGuildProfile(GuildProfile profile)
+    {
+        
+    }
 }
 
 public class QuestsRepositeory
@@ -32,6 +71,26 @@ public class QuestsRepositeory
     public QuestsRepositeory(IMongoDatabase database)
     {
         _collection = database.GetCollection<Quests>("Quests");
+    }
+
+    public async Task<Quests> CreateQuest(Quests quest)
+    {
+        
+    }
+
+    public async Task<Quests> UpdateQuest(Quests quest)
+    {
+        
+    }
+
+    public async Task<Quests> DeleteQuest(Quests quest)
+    {
+        
+    }
+
+    public async Task<Quests> GetQuest(Quests quest)
+    {
+        
     }
     
     

@@ -26,6 +26,9 @@ public sealed class GuildProfile
 {
     [BsonId] public ObjectId Id { get; set; }
     public int GuildId { get; set; }
+    public string Name { get; set; }
+    public string ChatLogChennalName { get; set; }
+    public int ChatLogId { get; set; }
     
     //todo need to think of setting need for the guild to function right.
 }
