@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Rumba_Bot.Services.MongoDBSevice;
@@ -13,7 +14,10 @@ public class UserProfileRepositeory
 
     public async Task<UserProfile> CreateUserProfile(UserProfile profile)
     {
+        profile.CreatedAt = DateTime.Now;
+        profile.Id = ObjectId.Empty;
         
+        await _collection.InsertOneAsync(profile);
     }
 
     public async Task<UserProfile> UpdateUserProfile(UserProfile profile)
@@ -45,7 +49,12 @@ public class GuildProfileRepositeory
 
     public async Task<GuildProfile> CreateGuildProfile(GuildProfile profile)
     {
+        profile.CreatedAt = DateTime.UtcNow;
+        profile.Id = null;
         
+        await _collection.InsertOneAsync(profile);
+        
+        return profile;
     }
 
     public async Task<GuildProfile> UpdateGuildProfile(GuildProfile profile)
@@ -75,7 +84,10 @@ public class QuestsRepositeory
 
     public async Task<Quests> CreateQuest(Quests quest)
     {
+        quest.CreatedAt = DateTime.UtcNow;
+        quest.Id = ObjectId.Empty;
         
+        await _collection.InsertOneAsync(quest);
     }
 
     public async Task<Quests> UpdateQuest(Quests quest)

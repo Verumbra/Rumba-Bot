@@ -18,6 +18,7 @@ public sealed class UserProfile
     public int TotalXp { get; set; }
     public List<string> Roles { get; set; }
     public List<Item> Items { get; set; }
+    
     //todo more features need to be added.
 }
 
