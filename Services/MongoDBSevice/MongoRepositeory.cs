@@ -76,9 +76,13 @@ public class GuildProfileRepositeory
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
-    public async Task<bool> UpdateGuildNameProfile(string name)
+    public async Task<bool> UpdateGuildNameProfile(string name, int id)
     {
+        var update = Builders<GuildProfile>.Update
+            .Set(p => p.Name, name);
         
+        var result = await _collection.UpdateOneAsync(p => p.GuildId == id, update);
+        return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
     public async Task<bool> UpdateGuildCLChennalName(string name, int Id)
@@ -90,9 +94,13 @@ public class GuildProfileRepositeory
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
-    public async Task<bool> UpdateGuildCLChennalId(int id)
+    public async Task<bool> UpdateGuildCLChennalId(int ChennalId, int GuildId)
     {
+        var update = Builders<GuildProfile>.Update
+            .Set(p => p.ChatLogId, ChennalId);
+        var result = await _collection.UpdateOneAsync(p => p.GuildId == GuildId, update);
         
+        return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
     public async Task<GuildProfile> DeleteGuildProfile(GuildProfile profile)
