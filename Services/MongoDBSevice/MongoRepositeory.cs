@@ -14,7 +14,7 @@ public class UserProfileRepositeory
 
     public async Task<UserProfile> CreateUserProfile(UserProfile profile)
     {
-        profile.CreatedAt = DateTime.Now;
+        //profile.CreatedAt = DateTime.Now;
         profile.Id = ObjectId.Empty;
         
         await _collection.InsertOneAsync(profile);
@@ -49,15 +49,48 @@ public class GuildProfileRepositeory
 
     public async Task<GuildProfile> CreateGuildProfile(GuildProfile profile)
     {
-        profile.CreatedAt = DateTime.UtcNow;
-        profile.Id = null;
+        //profile = DateTime.UtcNow;
+        profile.Id = ObjectId.Empty;
         
         await _collection.InsertOneAsync(profile);
         
         return profile;
     }
 
-    public async Task<GuildProfile> UpdateGuildProfile(GuildProfile profile)
+    public async Task<IEnumerable<GuildProfile>> BatchCreateGuildProfile(IEnumerable<GuildProfile> profiles)
+    {
+        profiles = profiles.ToArray();
+
+        foreach (var profile in profiles)
+        {
+            profile.Id = ObjectId.Empty;
+        }
+        await _collection.InsertManyAsync(profiles);
+        return profiles;
+    }
+
+    public async Task<bool> UpdateFullGuildProfile(GuildProfile profile) //full override
+    {
+        var result = await _collection.ReplaceOneAsync(p => p.Id == profile.Id, profile);
+        
+        return result.IsAcknowledged && result.ModifiedCount > 0;
+    }
+
+    public async Task<bool> UpdateGuildNameProfile(string name)
+    {
+        
+    }
+
+    public async Task<bool> UpdateGuildCLChennalName(string name, int Id)
+    {
+        var update = Builders<GuildProfile>.Update
+            .Set(p => p.ChatLogChennalName, name);
+        
+        var result = await _collection.UpdateOneAsync(p => p.GuildId == Id, update);
+        return result.IsAcknowledged && result.ModifiedCount > 0;
+    }
+
+    public async Task<bool> UpdateGuildCLChennalId(int id)
     {
         
     }
@@ -84,7 +117,7 @@ public class QuestsRepositeory
 
     public async Task<Quests> CreateQuest(Quests quest)
     {
-        quest.CreatedAt = DateTime.UtcNow;
+        //quest.CreatedAt = DateTime.UtcNow;
         quest.Id = ObjectId.Empty;
         
         await _collection.InsertOneAsync(quest);
