@@ -103,14 +103,26 @@ public class GuildProfileRepositeory
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
-    public async Task<GuildProfile> DeleteGuildProfile(GuildProfile profile)
+    public async Task<bool> DeleteGuildProfile(int id)
     {
-        
+        var  result = await _collection.DeleteOneAsync(p => p.Id == id.Id);
+        return result.IsAcknowledged && result.DeletedCount > 0;
     }
 
     public async Task<GuildProfile> GetGuildProfile(GuildProfile profile)
     {
-        
+        var result = await _collection
+            .FindAsync(p => p.Id == profile.Id);
+        return result.FirstOrDefault();
+    }
+
+    public async Task<int> GetGuildCLChennalId(int GuildId)
+    {
+        var result = await _collection
+            .FindAsync(p => p.GuildId == GuildId);
+        var guildData = result.FirstOrDefault();
+        int chennalId = guildData.ChatLogId;
+        return chennalId;
     }
 }
 
