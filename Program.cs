@@ -16,6 +16,7 @@ class DiscordBot
     
     
     
+    
     static async Task Main(string[] args)
     {
         try
@@ -69,6 +70,18 @@ class DiscordBot
                     .HandleMessageUpdated(async (e, s) =>
                     {
                         string before;
+                        
+
+                        try
+                        {
+                            await userDb.GetGuildInfo(s.Guild.Id);
+                        }
+                        catch (Exception exception)
+                        {
+                            
+                            await userDb.CacheGuildInfo(s.Guild.Id);
+                        }
+                        
                         try
                         {
                             before = s.MessageBefore.ToString();

@@ -20,14 +20,16 @@ public class UserProfileRepositeory
         await _collection.InsertOneAsync(profile);
     }
 
-    public async Task<UserProfile> UpdateUserProfile(UserProfile profile)
+    public async Task<bool> UpdateUserProfile(UserProfile profile)
     {
-        
+        var result = await _collection.ReplaceOneAsync(x => x.Id == profile.Id, profile);
+        return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
     public async Task<UserProfile> DeleteUserProfile(UserProfile profile)
     {
-        
+        var result = await _collection.DeleteOneAsync(x => x.Id == profile.Id);
+        return result.IsAcknowledged ? profile : null;
     }
 
     public async Task<UserProfile> GetUserProfile(UserProfile profile)

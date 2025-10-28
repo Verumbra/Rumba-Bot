@@ -71,6 +71,16 @@ public class RedisServices
         m?.Dispose();
     }
 
+    public async Task CacheGuildInfo(ulong guildId, ulong LogChennalId)
+    {
+        
+    }
+
+    public async Task<> GetGuildInfo(ulong guildId)
+    {
+        
+    }
+
 
     public async Task SaveMessage(string userIdCode, string message)
     {
@@ -89,6 +99,8 @@ public class RedisServices
         }
         
     }
+    
+    
 
     public async Task<String> RetrieveMessage(string userKey)
     {
