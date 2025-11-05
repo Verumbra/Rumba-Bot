@@ -70,16 +70,16 @@ class DiscordBot
                     .HandleMessageUpdated(async (e, s) =>
                     {
                         string before;
-                        
+                        Tuple<ulong,ulong,string> logSettings;
 
                         try
                         {
-                            await userDb.GetGuildInfo(s.Guild.Id);
+                            await userDb.GetGuildLogSettingInfo(s.Guild.Id);
                         }
                         catch (Exception exception)
                         {
                             
-                            await userDb.CacheGuildInfo(s.Guild.Id);
+                            await userDb.CacheGuildInfo(s.Guild.Id, );
                         }
                         
                         try

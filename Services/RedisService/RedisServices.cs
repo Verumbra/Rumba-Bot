@@ -73,11 +73,46 @@ public class RedisServices
 
     public async Task CacheGuildInfo(ulong guildId, ulong LogChennalId)
     {
+        string guildKey = $"{guildId}";
+        var settings = new string[] { $"{LogChennalId}" };
+        //var n = LogChennalId.ToString();
+        //var m = ulong.Parse(n);
         
+        var redis = GetDatabase();
+        try
+        {
+            foreach (var setting in settings)
+            {
+                await redis.SetAddAsync(guildKey, setting);
+            }
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
-    public async Task<> GetGuildInfo(ulong guildId)
+    public async Task<Tuple<ulong,ulong>> GetGuildLogSettingInfo(ulong guildId)
     {
+        string guildKey = $"{guildId}";
+        var redis = GetDatabase();
+        
+        try
+        {
+            var retrievedSettings = await redis.SetMembersAsync(guildId.ToString());
+            var results = new Tuple<ulong, ulong>(ulong.Parse(retrievedSettings[0]), ulong.Parse(retrievedSettings[1]));
+            //foreach (var setting in retrievedSettings)
+            //{
+                
+            //}
+            return results;
+        }
+        catch (Exception e)
+        {
+            return new Tuple<ulong, ulong> (0, 0 );
+        }
         
     }
 
