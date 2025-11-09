@@ -14,7 +14,7 @@ public class Item
 public sealed class UserProfile
 {
     [BsonId] public ObjectId Id { get; set; }
-    public string UserId { get; set; }
+    public string UserId { get; set; } 
     public int TotalXp { get; set; }
     public List<string> Roles { get; set; }
     public List<Item> Items { get; set; }
@@ -26,9 +26,13 @@ public sealed class UserProfile
 public sealed class GuildProfile
 {
     [BsonId] public ObjectId Id { get; set; }
-    public int GuildId { get; set; }
+    
+    [BsonRepresentation(BsonType.Int64, AllowOverflow = true)]
+    public ulong GuildId { get; set; }
     public string Name { get; set; }
     public string ChatLogChennalName { get; set; }
+    
+    [BsonRepresentation(BsonType.Int64, AllowOverflow = true)]
     public int ChatLogId { get; set; }
     
     //todo need to think of setting need for the guild to function right.

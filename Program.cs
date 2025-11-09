@@ -74,11 +74,12 @@ class DiscordBot
 
                         try
                         {
-                            await userDb.GetGuildLogSettingInfo(s.Guild.Id);
+                            logSettings = await userDb.GetGuildLogSettingInfo(s.Guild.Id);
+                            if (!logSettings)
                         }
                         catch (Exception exception)
                         {
-                            
+
                             await userDb.CacheGuildInfo(s.Guild.Id, );
                         }
                         
