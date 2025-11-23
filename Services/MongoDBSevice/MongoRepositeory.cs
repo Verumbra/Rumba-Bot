@@ -49,6 +49,13 @@ public class GuildProfileRepositeory
         _collection = database.GetCollection<GuildProfile>("GuildProfile");
     }
 
+    public async Task<bool> CheckGuildProfile(ulong id)
+    {
+        var results = await _collection.CountDocumentsAsync(p => p.GuildId == id);
+        return results > 0;
+        
+    }
+
     public async Task<GuildProfile> CreateGuildProfile(GuildProfile profile)
     {
         //profile = DateTime.UtcNow;
@@ -78,7 +85,7 @@ public class GuildProfileRepositeory
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
-    public async Task<bool> UpdateGuildNameProfile(string name, int id)
+    public async Task<bool> UpdateGuildNameProfile(string name, ulong id)
     {
         var update = Builders<GuildProfile>.Update
             .Set(p => p.Name, name);
@@ -87,7 +94,7 @@ public class GuildProfileRepositeory
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
-    public async Task<bool> UpdateGuildCLChennalName(string name, int Id)
+    public async Task<bool> UpdateGuildCLChennalName(string name, ulong Id)
     {
         var update = Builders<GuildProfile>.Update
             .Set(p => p.ChatLogChennalName, name);
@@ -96,7 +103,7 @@ public class GuildProfileRepositeory
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
-    public async Task<bool> UpdateGuildCLChennalId(int ChennalId, int GuildId)
+    public async Task<bool> UpdateGuildCLChennalId(int ChennalId, ulong GuildId)
     {
         var update = Builders<GuildProfile>.Update
             .Set(p => p.ChatLogId, ChennalId);
@@ -118,7 +125,7 @@ public class GuildProfileRepositeory
         return result.FirstOrDefault();
     }
 
-    public async Task<int> GetGuildCLChennalId(int GuildId)
+    public async Task<int> GetGuildCLChennalId(ulong GuildId)
     {
         var result = await _collection
             .FindAsync(p => p.GuildId == GuildId);

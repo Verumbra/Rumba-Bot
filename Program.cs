@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using Rumba_Bot.Services.MongoDBSevice;
 using Rumba_Bot.Services.RedisService;
 using Rumba_Bot.Services.StringUtility;
 
@@ -64,6 +65,24 @@ class DiscordBot
                         //
                         var guild = e.Guilds;
                         //s.Guilds.Values
+                        
+                        foreach (var g in guild)
+                        {
+                            try
+                            {
+                                if 
+                            }
+                            catch (Exception exception)
+                            {
+                                Console.WriteLine(exception);
+                                throw;
+                            }
+                            
+                            var guildTemp = new GuildProfile
+                            {
+                                
+                            };
+                        }
                         
                     })
                     
