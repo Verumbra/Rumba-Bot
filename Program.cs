@@ -47,7 +47,8 @@ class DiscordBot
         //Console.WriteLine($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}");
         var userDb = new RedisServices("localhost:6379",false);
         await userDb.StartConnection();
-        
+        var mongoServices = new MongoService("localhost:1234");//need to get the real connection string
+
         
         
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(EnvValues.Token, DiscordIntents.All);
