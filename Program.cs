@@ -4,6 +4,7 @@
 using Rumba_Bot.Services.MongoDBSevice;
 using Rumba_Bot.Services.RedisService;
 using Rumba_Bot.Services.StringUtility;
+using MongoDB.Driver;
 
 namespace Rumba_Bot;
 
@@ -47,8 +48,11 @@ class DiscordBot
         //Console.WriteLine($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}");
         var userDb = new RedisServices("localhost:6379",false);
         await userDb.StartConnection();
-        var mongoServices = new MongoService("localhost:1234");//need to get the real connection string
-
+        var MongoClient = new MongoClient("localhost:27017");
+        var MongoDatabase = MongoClient.GetDatabase("RumbaBot");
+        
+        var UserRepo = new UserProfileRepositeory(MongoDatabase);
+        var GuildRepo = new GuildProfileRepositeory(MongoDatabase);
         
         
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(EnvValues.Token, DiscordIntents.All);
@@ -71,7 +75,10 @@ class DiscordBot
                         {
                             try
                             {
-                                if 
+                                if (await GuildRepo.CheckGuildProfile(g.Key))
+                                {
+                                    
+                                }
                             }
                             catch (Exception exception)
                             {
