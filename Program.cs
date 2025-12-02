@@ -77,7 +77,17 @@ class DiscordBot
                             {
                                 if (await GuildRepo.CheckGuildProfile(g.Key))
                                 {
-                                    
+                                    break;
+                                }
+                                else
+                                {
+                                    var tempGuildProfile = new GuildProfile()
+                                    {
+                                        GuildId = g.Key,
+                                        Name = g.Value.Name,
+                                        //add more when I add more settings
+                                    };
+                                    await GuildRepo.CreateGuildProfile(tempGuildProfile);
                                 }
                             }
                             catch (Exception exception)
@@ -85,31 +95,35 @@ class DiscordBot
                                 Console.WriteLine(exception);
                                 throw;
                             }
-                            
-                            var guildTemp = new GuildProfile
-                            {
-                                
-                            };
                         }
-                        
                     })
                     
                     .HandleMessageUpdated(async (e, s) =>
                     {
                         string before;
-                        Tuple<ulong,ulong,string> logSettings;
-
+                        Tuple<ulong,ulong> logSettings;
+                        ulong logChennal = 0;
+                        
+                        //CHECK CHECHE
                         try
                         {
                             logSettings = await userDb.GetGuildLogSettingInfo(s.Guild.Id);
-                            if (!logSettings)
+                            var x = logSettings;
+                            if (logSettings.Item2 == 0)
+                            {
+                                //need to finish this part
+                            }
+                            
+                            logChennal = logSettings.Item2;
                         }
                         catch (Exception exception)
                         {
-
                             await userDb.CacheGuildInfo(s.Guild.Id, );
+                            logChennal = 0;
                         }
                         
+                        
+                        //Get Org message
                         try
                         {
                             before = s.MessageBefore.ToString();
@@ -119,27 +133,24 @@ class DiscordBot
                             Console.WriteLine(exception);
                             before = "message not ceched";
                         }
+                        
+                        
                         string after = s.Message.ToString();
 
-                        try
-                        {
-                            var embed = new DiscordEmbedBuilder()
+
+                        var embed = new DiscordEmbedBuilder()
                             {
                                 Title = "Message edited",
                                 
                             }
                             .AddField("UserName", s.Author.Username, true)
                             .AddField("Orginal Message", $"Original message: {before}");
-                        }
-                        catch (Exception exception)
-                        {
-                            Console.WriteLine(exception);
-                            throw;
-                        }
-                        
-                        s.Guild.Channels
 
-                        
+
+                        var chennal = await s.Guild.GetChannelAsync(logChennal);
+                        await chennal.SendMessageAsync(embed: embed);
+
+
                     })
                     
                     .HandleMessageDeleted(async (e, s) =>
