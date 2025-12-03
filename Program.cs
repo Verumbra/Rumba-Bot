@@ -281,11 +281,20 @@ class DiscordBot
 
                         if (e.Message.Content.ToLower().StartsWith("!setlogchannel"))
                         {
-                            int channelId = unchecked((int)e.Channel.Id);
-                            string channelName = e.Channel.Name;
-                            await GuildRepo.UpdateGuildCLChennalId(channelId, e.Guild.Id);
-                            await GuildRepo.UpdateGuildCLChennalName(channelName, e.Guild.Id);
-                            await e.Message.RespondAsync($"Successfully updated ChatLog Settings");
+                            var member = e.Author as DiscordMember;
+                            if (member.Permissions.HasPermission(DiscordPermission.Administrator))
+                            {
+                                int channelId = unchecked((int)e.Channel.Id);
+                                string channelName = e.Channel.Name;
+                                await GuildRepo.UpdateGuildCLChennalId(channelId, e.Guild.Id);
+                                await GuildRepo.UpdateGuildCLChennalName(channelName, e.Guild.Id);
+                                await e.Message.RespondAsync($"Successfully updated ChatLog Settings");
+                            }
+                            else
+                            {
+                                await e.Message.RespondAsync($"Access denied, {e.Message.Author.Username} is not an admin!");
+                            }
+
                         }
                     })
             );
