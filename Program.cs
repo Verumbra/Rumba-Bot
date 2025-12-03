@@ -110,9 +110,11 @@ class DiscordBot
                         try
                         {
                             logSettings = await userDb.GetGuildLogSettingInfo(s.Guild.Id);
-                            var x = logSettings;
+                            //var x = logSettings;
                             if (logSettings.Item2 == 0)
                             {
+                                var temp = await GuildRepo.GetGuildCLChennalId(s.Guild.Id);
+                                await userDb.CacheGuildLoggingSettings(s.Guild.Id, IdProcessor.InttoUlong(temp));
                                 //need to finish this part
                             }
                             
