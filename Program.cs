@@ -155,8 +155,63 @@ class DiscordBot
                     
                     .HandleMessageDeleted(async (e, s) =>
                     {
+                        string orgMessage;
+                        string messageChannel;
+                        Tuple<ulong,ulong> logSettings;
+                        ulong logChennal = 0;
                         
+                        //CHECK CHECHE
+                        try
+                        {
+                            logSettings = await userDb.GetGuildLogSettingInfo(s.Guild.Id);
+                            var x = logSettings;
+                            if (logSettings.Item2 == 0)
+                            {
+                                //need to finish this part
+                            }
+                            
+                            logChennal = logSettings.Item2;
+                        }
+                        catch (Exception exception)
+                        {
+                            await userDb.CacheGuildInfo(s.Guild.Id, );
+                            logChennal = 0;
+                        }
+                        
+                        
+                        //get the deleted message
+                        try
+                        {
+                            orgMessage = s.Message.ToString();
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                            orgMessage = "message not ceched";
+                        }
+                        
+                        //get message chennal
+                        try
+                        {
+                            messageChannel = s.Message.ChannelId.ToString();
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                            messageChannel = "channel not found?";
+                        }
+                        
+                        //make the embed
+                        var embed = new DiscordEmbedBuilder()
+                        {
+                            Title = "Message deleted",
+                        }.AddField("Original Message", $"Original message: {orgMessage}")
+                            .AddField("Orginal Message", $"Original message: {logChennal}");
+                        
+                        var chennal = await s.Guild.GetChannelAsync(logChennal);
+                        await chennal.SendMessageAsync(embed: embed);
                     })
+                    
                     
                     
                     .HandleMessageCreated(async (s, e) =>
@@ -222,6 +277,15 @@ class DiscordBot
                                 throw;
                             }
                             
+                        }
+
+                        if (e.Message.Content.ToLower().StartsWith("!setlogchannel"))
+                        {
+                            int channelId = unchecked((int)e.Channel.Id);
+                            string channelName = e.Channel.Name;
+                            await GuildRepo.UpdateGuildCLChennalId(channelId, e.Guild.Id);
+                            await GuildRepo.UpdateGuildCLChennalName(channelName, e.Guild.Id);
+                            await e.Message.RespondAsync($"Successfully updated ChatLog Settings");
                         }
                     })
             );
