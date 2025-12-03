@@ -23,6 +23,19 @@ public sealed class UserProfile
 }
 
 [BsonIgnoreExtraElements]
+public sealed class TrustedRoles
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public ObjectId Id { get; set; }
+    
+    public string Name { get; set; }
+    
+    [BsonRepresentation(BsonType.Int64, AllowOverflow = true)]
+    public int RoleId { get; set; }
+}
+
+[BsonIgnoreExtraElements]
 public sealed class GuildProfile
 {
     [BsonId] public ObjectId Id { get; set; }
@@ -34,6 +47,8 @@ public sealed class GuildProfile
     
     [BsonRepresentation(BsonType.Int64, AllowOverflow = true)]
     public int ChatLogId { get; set; }
+    
+    public TrustedRoles[] TrustedList { get; set; }
     
     //todo need to think of setting need for the guild to function right.
 }
