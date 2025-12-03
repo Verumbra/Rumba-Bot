@@ -71,7 +71,7 @@ public class RedisServices
         m?.Dispose();
     }
 
-    public async Task CacheGuildInfo(ulong guildId, ulong LogChennalId)
+    public async Task CacheGuildLoggingSettings(ulong guildId, ulong LogChennalId)
     {
         string guildKey = $"{guildId}";
         var settings = new string[] { $"{LogChennalId}" };

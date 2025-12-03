@@ -120,7 +120,7 @@ class DiscordBot
                         }
                         catch (Exception exception)
                         {
-                            await userDb.CacheGuildInfo(s.Guild.Id, );
+                            await userDb.CacheGuildLoggingSettings(s.Guild.Id, );
                             logChennal = 0;
                         }
                         
@@ -176,7 +176,7 @@ class DiscordBot
                         }
                         catch (Exception exception)
                         {
-                            await userDb.CacheGuildInfo(s.Guild.Id, );
+                            await userDb.CacheGuildLoggingSettings(s.Guild.Id, );
                             logChennal = 0;
                         }
                         
