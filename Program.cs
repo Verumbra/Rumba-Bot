@@ -122,11 +122,8 @@ class DiscordBot
                         }
                         catch (Exception exception)
                         {
-<<<<<<< Updated upstream
-                            await userDb.CacheGuildLoggingSettings(s.Guild.Id, );
-=======
+
                             //await userDb.CacheGuildLoggingSettings(s.Guild.Id, );
->>>>>>> Stashed changes
                             logChennal = 0;
                         }
                         
@@ -182,11 +179,7 @@ class DiscordBot
                         }
                         catch (Exception exception)
                         {
-<<<<<<< Updated upstream
-                            await userDb.CacheGuildLoggingSettings(s.Guild.Id, );
-=======
                             //await userDb.CacheGuildLoggingSettings(s.Guild.Id, );
->>>>>>> Stashed changes
                             logChennal = 0;
                         }
                         
