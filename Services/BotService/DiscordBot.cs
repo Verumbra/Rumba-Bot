@@ -13,11 +13,11 @@ public class RumbaConfig
 
 public class GuildManagementHelper
 {
-    public async Task OnAllGuildsReady(DiscordClient client, GuildDownloadCompletedEventArgs)
+    public async Task OnAllGuildsReady(DiscordClient client, GuildDownloadCompletedEventArgs x)
     {
         
     }
-    private async Task<[UserProfile]> ProcessGuildMembers(DiscordGuild guild)
+    //private async Task<[UserProfile]> ProcessGuildMembers(DiscordGuild guild)
     
 }
 

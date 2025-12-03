@@ -3,7 +3,6 @@ namespace Rumba_Bot.Services.LevelService;
 public class LevelingService
 {
     private string XpCurve { get; set; }
-    private
 
     public LevelingService(var GuildXpCurve)
     {
@@ -20,7 +19,7 @@ public class LevelingService
 
     public LevelingService()
     {
-       var XpCurve = 
+        XpCurve = "EXP";
     }
     
     
