@@ -4,11 +4,11 @@ public class LevelingService
 {
     private string XpCurve { get; set; }
 
-    public LevelingService(var GuildXpCurve)
+    public LevelingService(string xpCurve)
     {
         try
         {
-
+            //load stuff from cache or database
         }
         catch (Exception e)
         {
