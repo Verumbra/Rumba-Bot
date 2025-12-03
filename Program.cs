@@ -4,6 +4,7 @@
 using Rumba_Bot.Services.MongoDBSevice;
 using Rumba_Bot.Services.RedisService;
 using Rumba_Bot.Services.StringUtility;
+using Rumba_Bot.Services.ConversionUtility;
 using MongoDB.Driver;
 
 namespace Rumba_Bot;
@@ -13,6 +14,7 @@ namespace Rumba_Bot;
 class DiscordBot
 {
     private static UserInputProcessor InputParser = new UserInputProcessor();
+    private static UlongProcessor IdProcessor  = new UlongProcessor();
     private static DiscordClient Client { get; set; }
     private static EnvReader EnvValues = new EnvReader();
     
