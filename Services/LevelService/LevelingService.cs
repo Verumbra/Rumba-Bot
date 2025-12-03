@@ -20,7 +20,7 @@ public class LevelingService
 
     public LevelingService()
     {
-        XpCurve = 
+       var XpCurve = 
     }
     
     
