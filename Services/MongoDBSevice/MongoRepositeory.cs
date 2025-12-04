@@ -1,19 +1,21 @@
 
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Rumba_Bot.Services.ConversionUtility;
 
 namespace Rumba_Bot.Services.MongoDBSevice;
 
 public class UserProfileRepositeory
 {
     private readonly IMongoCollection<UserProfile> _collection;
+    private IDProcessor _idProcessor = new IDProcessor();
 
     public UserProfileRepositeory(IMongoDatabase database)
     {
         _collection = database.GetCollection<UserProfile>("UserProfile");
     }
 
-    public async Task<UserProfile> CreateUserProfile(UserProfile profile)
+    public async Task CreateUserProfile(UserProfile profile)
     {
         //profile.CreatedAt = DateTime.Now;
         profile.Id = ObjectId.Empty;
@@ -35,7 +37,7 @@ public class UserProfileRepositeory
 
     public async Task<UserProfile> GetUserProfile(UserProfile profile)
     {
-        
+        return new UserProfile(); //todo need to flesh out userProfile more to finish this function
     }
     
     
@@ -44,7 +46,8 @@ public class UserProfileRepositeory
 public class GuildProfileRepositeory
 {
     private readonly IMongoCollection<GuildProfile> _collection;
-
+    private IDProcessor _idProcessor = new IDProcessor();
+    
     public GuildProfileRepositeory(IMongoDatabase database)
     {
         _collection = database.GetCollection<GuildProfile>("GuildProfile");
@@ -118,9 +121,9 @@ public class GuildProfileRepositeory
         return result.IsAcknowledged && result.ModifiedCount > 0;
     }
 
-    public async Task<bool> DeleteGuildProfile(int id)
+    public async Task<bool> DeleteGuildProfile(string id)
     {
-        var  result = await _collection.DeleteOneAsync(p => p.Id == id);
+        var  result = await _collection.DeleteOneAsync(p => p.Id == _idProcessor.ToObjectId(id));
         return result.IsAcknowledged && result.DeletedCount > 0;
     }
 
@@ -144,31 +147,33 @@ public class GuildProfileRepositeory
 public class QuestsRepositeory
 {
     private readonly IMongoCollection<Quests> _collection;
+    private IDProcessor _idProcessor = new IDProcessor();
 
     public QuestsRepositeory(IMongoDatabase database)
     {
         _collection = database.GetCollection<Quests>("Quests");
     }
 
-    public async Task<Quests> CreateQuest(Quests quest)
+    public async Task<string> CreateQuest(Quests quest)
     {
         //quest.CreatedAt = DateTime.UtcNow;
         quest.Id = ObjectId.Empty;
         
         await _collection.InsertOneAsync(quest);
+        return quest.Id.ToString();
     }
 
-    public async Task<Quests> UpdateQuest(Quests quest)
+    public async Task UpdateQuest(Quests quest)
     {
         
     }
 
-    public async Task<Quests> DeleteQuest(Quests quest)
+    public async Task DeleteQuest(Quests quest)
     {
         
     }
 
-    public async Task<Quests> GetQuest(Quests quest)
+    public async Task GetQuest(Quests quest)
     {
         
     }
