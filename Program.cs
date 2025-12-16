@@ -50,7 +50,8 @@ class DiscordBot
         //Console.WriteLine($"{EnvValues.RedisHost}:{EnvValues.RedisPort},password={EnvValues.RedisPassword}");
         var userDb = new RedisServices("localhost:6379",false);
         await userDb.StartConnection();
-        var MongoClient = new MongoClient("localhost:27017");
+        string mdbConnectionString = $"mongodb://{EnvValues.MongoUsername}:{EnvValues.MongoPassword}@{EnvValues.MongoHost}:{EnvValues.MongoPort}/{EnvValues.MongoDatabase}?authSource=admin";
+        var MongoClient = new MongoClient(mdbConnectionString);
         var MongoDatabase = MongoClient.GetDatabase("RumbaBot");
         
         var UserRepo = new UserProfileRepositeory(MongoDatabase);
